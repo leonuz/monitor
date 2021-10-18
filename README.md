@@ -1,22 +1,22 @@
-#Yet Another Monitor Specfications Program whit Estheroids 
-##YAMSP
-#  
+# Yet Another Monitor Specfications Program whit Estheroids 
+## YAMSP
+ 
 YAMPS it's a small bash Tput monitor program.
 allows to get information necessary to know a Linux system. 
 
-![](/yamsp.png?raw=true "Output from yamsp Monitor")
+![](/output.png?raw=true "Output from yamsp Monitor")
 
 ---
 
-###About YAMPS
+### About YAMPS
 It is a program written in bash, with the purpose of showing how with Tput it is easy to 
 manipulate the console of linux systems, interacting with the size, shape and color.
 
-Among the information that YAMPS is able to give, you can find:
--Kernel and Linux version
--Iinternal and external IP address
--Filesystem information
--Temperature and Voltaje (Motherboard and HDD)
+Among the information that YAMPS is able to give, you can find: 
+- Kernel and Linux version
+- Iinternal and external IP address
+- Filesystem information
+- Temperature and Voltaje (Motherboard and HDD)
 
 To obtain the temp and voltage, it's necessary this additional packages:  
 [lm_sensor](https://github.com/lm-sensors/lm-sensors)  
