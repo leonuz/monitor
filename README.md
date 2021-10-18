@@ -30,5 +30,5 @@ type being used.
 more info [here](https://linuxcommand.org/lc3_adv_tput.php) and [here](https://www.gnu.org/software/termutils/manual/termutils-2.0/html_chapter/tput_1.html#SEC5)
 
 
-`leonuz`
+`leonuz`  
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
