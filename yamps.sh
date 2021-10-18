@@ -1,15 +1,39 @@
 #! /bin/bash
-# Description: using TPUT (bash coloring)
-# for coloring some monitoring output
-# 
-# powered by leonuz
-# Merida Venezuela
+# YAMPS it's a small bash Tput monitor program.
+# allows to get information necessary to know a Linux system.
 #
+
+COLUMNS=`tput cols`
+LINES=`tput lines`
+line=`expr $LINES / 2`
+column=`expr \( $COLUMNS - 6 \) / 2`
+
+# unset any variable which system may be using
+unset temreset osrelease architecture kernelrelease internalip externalip nameserver loadaverage
+
+# Define Global Variable 
+hd1=(/dev/sda1)
+parti=(/dev/mapper/sniperhack--vg-root)
+
+# clear the screen
+# First Page Title
+clear
+tput sc
+tput cup $line $column
+tput rev
+echo 'YAMPS Monitor'
+tput sgr0
+tput rc
+sleep 2
+
 # clear the screen
 clear
 
-# unset any variable which system may be using
-unset temreset osrelease architecture kernelrelease internalip nameserver loadaverage
+unset temreset osrelease architecture kernelrelease internalip externalip nameserver loadaverage
+
+# Define Global Variable 
+hd1=(/dev/sda1)
+parti=(/dev/mapper/sniperhack--vg-root)
 
 # Define Variable tecreset
 temreset=$(tput sgr0)
@@ -28,6 +52,10 @@ echo "$(tput setaf 7)$(tput setab 4)$(tput bold)Load Average :$(tput sgr 0)" $lo
 # Check Internal IP
 internalip=$(hostname -I)
 echo "$(tput setaf 7)$(tput setab 4)$(tput bold)Internal IP :$(tput sgr 0)" $internalip
+
+# Check External IP
+externalip=$(curl -s ifconfig.co)
+echo "$(tput setaf 7)$(tput setab 4)$(tput bold)External IP :$(tput sgr 0)" $externalip
 
 # Check OS Release Version and Name
 osrelease=$(cat /etc/os-release | grep PRETTY_NAME | cut -f2 -d\") 
@@ -61,19 +89,19 @@ cat /tmp/ramcache | grep -v "Mem"
 # SYSTEM HDD
 echo "$(tput setaf 7)$(tput setab 1)$(tput bold)SYSTEM HDD$temreset"
 
-# Check Disk Usages (change /dev/sdxx to match your system)
-df -h /dev/sda1 /dev/sda6 > /tmp/diskusage
+# Check Disk Usages
+df -h $parti > /tmp/diskusage
 echo "$(tput setaf 7)$(tput setab 4)$(tput bold)Disk Usages :$(tput sgr 0)"  
 cat /tmp/diskusage
 
 # System Temperature
 echo "$(tput setaf 7)$(tput setab 1)$(tput bold)SYSTEM TEMPERATURE$temreset"
 
-# MOBO,CPU & HDD Temp (install lm-sensors and hddtemp )
-echo "$(tput setaf 7)$(tput setab 4)$(tput bold)MOBO & CPU Temp$(tput sgr 0)"
+# Motherboard,CPU & HDD Temp
+echo "$(tput setaf 7)$(tput setab 4)$(tput bold)Motherboard & CPU Temp :$(tput sgr 0)"
 sensors
-echo "$(tput setaf 7)$(tput setab 4)$(tput bold)HDD Temp$(tput sgr 0)"
-hddtemp /dev/sda
+echo "$(tput setaf 7)$(tput setab 4)$(tput bold)HDD Temp :$(tput sgr 0)"
+hddtemp $hd1
 
 # Check if connected to Internet or not
 ping -c 1 1.1.1.1 &> /dev/null && echo "$(tput setaf 7)$(tput setab 1)$(tput bold)INTERNET:$(tput sgr 0) Connected" || echo "$(tput setaf 7)$(tput setab 1)$(tput bold)INTERNET:$(tput sgr 0) Disconnected"
