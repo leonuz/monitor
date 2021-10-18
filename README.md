@@ -1,4 +1,4 @@
-# Yet Another Monitor Specfications Program whit Estheroids 
+# Yet Another Monitor Specfications Program 
 ## YAMSP
  
 YAMPS it's a small bash Tput monitor program.
@@ -26,8 +26,8 @@ To obtain the temp and voltage, it's necessary this additional packages:
 The tput command allows shell scripts to do things like clear the screen, underline text, 
 and center text no matter how wide the screen is. To do these things, it translates the 
 terminal-independent name of a terminal capability into its actual value for the terminal 
-type being used.
-more infoi [here](https://linuxcommand.org/lc3_adv_tput.php) and [here](https://www.gnu.org/software/termutils/manual/termutils-2.0/html_chapter/tput_1.html#SEC5)
+type being used.  
+more info [here](https://linuxcommand.org/lc3_adv_tput.php) and [here](https://www.gnu.org/software/termutils/manual/termutils-2.0/html_chapter/tput_1.html#SEC5)
 
 
 `leonuz`
