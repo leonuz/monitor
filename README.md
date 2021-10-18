@@ -1,4 +1,4 @@
-# Yet Another Monitor Specfications Program 
+# Yet Another Monitor Specifications Program 
 ## YAMSP
  
 YAMPS it's a small bash Tput monitor program.
