@@ -1,8 +1,8 @@
 # Yet Another Monitor Specifications Program 
 ## YAMSP
  
-YAMPS it's a small bash Tput monitor program.
-allows to get information necessary to know a Linux system. 
+YAMPS it's a small bash Tput monitor program.  
+Allows to get necessary information to know the status of a Linux system. 
 
 ![](/output.png?raw=true "Output from yamsp Monitor")
 
