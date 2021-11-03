@@ -11,7 +11,7 @@ column=`expr \( $COLUMNS - 6 \) / 2`
 # unset any variable which system may be using
 unset temreset osrelease architecture kernelrelease internalip externalip nameserver loadaverage
 
-# Define Global Variable 
+# Define HDD Variable (EDIT for your system)
 hd1=(/dev/sda1)
 parti=(/dev/mapper/sniperhack--vg-root)
 
@@ -28,12 +28,6 @@ sleep 2
 
 # clear the screen
 clear
-
-unset temreset osrelease architecture kernelrelease internalip externalip nameserver loadaverage
-
-# Define Global Variable 
-hd1=(/dev/sda1)
-parti=(/dev/mapper/sniperhack--vg-root)
 
 # Define Variable tecreset
 temreset=$(tput sgr0)
