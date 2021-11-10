@@ -9,8 +9,8 @@ Allows to get necessary information to know the status of a Linux system.
 ---
 
 ### About YAMPS
-It is a program written in bash, with the purpose of showing how with Tput it is easy to 
-manipulate the console of linux systems, interacting with the size, shape and color.
+It is a program written in bash, with the purpose of showing how it's easy to 
+manipulate the console of linux systems using Tput, interacting with the size, shape and color.
 
 Among the information that YAMPS is able to give, you can find: 
 - Kernel and Linux version
