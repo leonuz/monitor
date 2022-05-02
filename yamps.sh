@@ -1,7 +1,8 @@
 #! /bin/bash
 # YAMPS it's a small bash Tput monitor program.
 # allows to get information necessary to know a Linux system.
-#
+# by
+# leonuz
 
 COLUMNS=`tput cols`
 LINES=`tput lines`
@@ -12,8 +13,8 @@ column=`expr \( $COLUMNS - 6 \) / 2`
 unset temreset osrelease architecture kernelrelease internalip externalip nameserver loadaverage
 
 # Define HDD Variable (EDIT for your system)
-hd1=(/dev/sda1)
-parti=(/dev/mapper/sniperhack--vg-root)
+hd1=(/dev/sda3)
+parti=(/dev/sda3)
 
 # clear the screen
 # First Page Title
@@ -35,33 +36,48 @@ temreset=$(tput sgr0)
 #System Information
 echo "$(tput setaf 7)$(tput setab 1)$(tput bold)SYSTEM INFORMATION$temreset"
 
-## Check System Uptime
+## Check System Uptime and Load Average
 tecuptime=$(uptime | awk '{print $3,$4,$5}')
-echo "$(tput setaf 7)$(tput setab 4)$(tput bold)System Uptime Days/(HH:MM) :$temreset" $tecuptime
-
-# Check Load Average
 loadaverage=$(top -n 1 -b | grep "load average:" | awk '{print $12 $13 $14}')
-echo "$(tput setaf 7)$(tput setab 4)$(tput bold)Load Average :$(tput sgr 0)" $loadaverage
+
+echo "$(tput setaf 7)$(tput setab 4)$(tput bold)System Uptime Days/(HH:MM) :$temreset $tecuptime $(tput setaf 7)$(tput setab 4)$(tput bold)Load Average :$(tput sgr 0)" $loadaverage
+
+## Check Load Averageyy
+#loadaverage=$(top -n 1 -b | grep "load average:" | awk '{print $12 $13 $14}')
+#echo "$(tput setaf 7)$(tput setab 4)$(tput bold)Load Average :$(tput sgr 0)" $loadaverage
+
+# Check External and Internal IP
+internalip=$(hostname -I)
+externalip=$(curl -s ifconfig.co)
+
+echo "$(tput setaf 7)$(tput setab 4)$(tput bold)Internal IP :$(tput sgr 0) $internalip $(tput setaf 7)$(tput setab 4)$(tput bold)External IP :$(tput sgr 0)" $externalip
 
 # Check Internal IP
-internalip=$(hostname -I)
-echo "$(tput setaf 7)$(tput setab 4)$(tput bold)Internal IP :$(tput sgr 0)" $internalip
+#internalip=$(hostname -I)
+#echo "$(tput setaf 7)$(tput setab 4)$(tput bold)Internal IP :$(tput sgr 0)" $internalip
 
 # Check External IP
-externalip=$(curl -s ifconfig.co)
-echo "$(tput setaf 7)$(tput setab 4)$(tput bold)External IP :$(tput sgr 0)" $externalip
+#externalip=$(curl -s ifconfig.co)
+#echo "$(tput setaf 7)$(tput setab 4)$(tput bold)External IP :$(tput sgr 0)" $externalip
+
+# Check OS Release Version and Name, Kernel Release and Architecture
+osrelease=$(cat /etc/os-release | grep PRETTY_NAME | cut -f2 -d\")
+architecture=$(uname -m)
+kernelrelease=$(uname -r)
+
+echo "$(tput setaf 7)$(tput setab 4)$(tput bold)OS Release Version :$(tput sgr 0) $osrelease $(tput setaf 7)$(tput setab 4)$(tput bold)Architecture :$(tput sgr 0) $architecture $(tput setaf 7)$(tput setab 4)$(tput bold)Kernel Release :$(tput sgr 0)" $kernelrelease
 
 # Check OS Release Version and Name
-osrelease=$(cat /etc/os-release | grep PRETTY_NAME | cut -f2 -d\") 
-echo "$(tput setaf 7)$(tput setab 4)$(tput bold)OS Release Version :$(tput sgr 0)" $osrelease 
+#osrelease=$(cat /etc/os-release | grep PRETTY_NAME | cut -f2 -d\") 
+#echo "$(tput setaf 7)$(tput setab 4)$(tput bold)OS Release Version :$(tput sgr 0)" $osrelease 
 
 # Check Architecture
-architecture=$(uname -m)
-echo "$(tput setaf 7)$(tput setab 4)$(tput bold)Architecture :$(tput sgr 0)" $architecture
+#architecture=$(uname -m)
+#echo "$(tput setaf 7)$(tput setab 4)$(tput bold)Architecture :$(tput sgr 0)" $architecture
 
 # Check Kernel Release
-kernelrelease=$(uname -r)
-echo "$(tput setaf 7)$(tput setab 4)$(tput bold)Kernel Release :$(tput sgr 0)" $kernelrelease
+#kernelrelease=$(uname -r)
+#echo "$(tput setaf 7)$(tput setab 4)$(tput bold)Kernel Release :$(tput sgr 0)" $kernelrelease
 
 # Users Logged
 echo "$(tput setaf 7)$(tput setab 1)$(tput bold)USERS LOGED IN SYSTEM$temreset"
@@ -94,8 +110,8 @@ echo "$(tput setaf 7)$(tput setab 1)$(tput bold)SYSTEM TEMPERATURE$temreset"
 # Motherboard,CPU & HDD Temp
 echo "$(tput setaf 7)$(tput setab 4)$(tput bold)Motherboard & CPU Temp :$(tput sgr 0)"
 sensors
-echo "$(tput setaf 7)$(tput setab 4)$(tput bold)HDD Temp :$(tput sgr 0)"
-hddtemp $hd1
+#echo "$(tput setaf 7)$(tput setab 4)$(tput bold)HDD Temp :$(tput sgr 0)"
+#hddtemp $hd1
 
 # Check if connected to Internet or not
 ping -c 1 1.1.1.1 &> /dev/null && echo "$(tput setaf 7)$(tput setab 1)$(tput bold)INTERNET:$(tput sgr 0) Connected" || echo "$(tput setaf 7)$(tput setab 1)$(tput bold)INTERNET:$(tput sgr 0) Disconnected"
